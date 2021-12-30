@@ -2,13 +2,19 @@ package weather
 
 import "time"
 
-// Forecast generates a value in the 0..100 range that can be mapped to the percentages of
+// Now generates a value in the 0..100 range that can be mapped to the percentages of
 // weather in zones.
-func Forecast() int {
+func Now() int {
+	return Forecast(time.Now())
+}
+
+// Forecast generates a value in the 0..100 range that can be mapped to the percentages of
+// weather in zones. It accepts a timestamp for which to generate the forecast.
+func Forecast(t time.Time) int {
 	// Algorithm from the SaintCoinach library
 	// https://github.com/Rogueadyn/SaintCoinach
 
-	currentSecond := time.Now().Unix()
+	currentSecond := t.Unix()
 
 	// 175 seconds/bell
 	bell := currentSecond / 175
